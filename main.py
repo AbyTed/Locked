@@ -11,7 +11,7 @@ root.geometry("600x400")
 root.title('Locked')
 
 
-root.iconbitmap("favicon.ico")
+root.iconbitmap("img/favicon.ico")
 
 
 pop_up_bool = False
