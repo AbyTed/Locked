@@ -30,7 +30,8 @@ def main():
 
         with open("store.json", "r") as open_file:
             # Reading from json file
-            json_object = json.load(open_file)
+                json_object = json.load(open_file)
+                
         passw_var.set("")
         name_var.set("")
         if (
@@ -55,7 +56,11 @@ def main():
     # label
     pop_up = tk.Label(
         root,
-        text="Please Enter Valid Credentials \n if you like to sign up please put in credentials \n 1. type your user and password you want \n 2. click sign up \n 3. you then can now input your user and password you have just created",
+        text="""Please Enter Valid Credentials
+         \n if you like to sign up please put in credentials
+         \n 1. type your user and password you want
+         \n 2. click sign up 
+        \n 3. you then can now input your user and password you have just created""",
         font=("calibre", 10, "bold"),
     )
 
