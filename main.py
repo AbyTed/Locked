@@ -1,99 +1,81 @@
-import json
 import tkinter as tk
+from tkinter import messagebox
 from utils import *
 from pages import *
-
+from cryptography.fernet import Fernet
+import os
 root = tk.Tk()
 
-# setting the windows size
-root.geometry("800x400")
-
-root.title("Locked")
-
-
+# Setting the window size
+root.geometry("400x300")
+root.title("Login System")
 root.iconbitmap("Img/favicon.ico")
 
+# Styling
+root.configure(bg="#EFEFEF")
 
-pop_up_bool = False
-# declaring string variable
-# for storing name and password
-name_var = tk.StringVar()
+user_var = tk.StringVar()
 passw_var = tk.StringVar()
-FirstUser = Credential("", "")
 
-
-# storing all
+# Storing all
 def main():
+    
     def submit():
-        FirstUser.Username = name_var.get()
-        FirstUser.Password = passw_var.get()
-
-        with open("store.json", "r") as open_file:
-            # Reading from json file
-                json_object = json.load(open_file)
-                
+        if passw_var.get() == "" or user_var.get() == "":
+            messagebox.showwarning(
+                "Empty Fields", "Please enter both username and password."
+            )
+            return False
+        
+        password_manager = PasswordManager(passw_var.get())
+        # Check if the website is already present
+        credentials = password_manager.get_credential("Locked.com")
+        
+        if credentials is None:
+            # If no credentials are found, add a new credential
+            password_manager.add_credential("Locked.com", user_var.get(), passw_var.get())
+            print("Credential added successfully.")
+        else:
+            # If credentials are found, check if the entered credentials match
+            
+            if credentials["username"] == user_var.get() and credentials["password"] == passw_var.get():
+                print("Success: Credentials match.")
+            else:
+                print("Error: Credentials do not match.")
+        print(credentials)
+        # Reset the entry fields
         passw_var.set("")
-        name_var.set("")
-        if (
-            FirstUser.Username == json_object["user"]
-            and FirstUser.Password == json_object["password"]
-        ):
-            main_page(root, name_var, passw_var, tk)
+        user_var.set("")
 
-    # signing up by using existing entries
-    def sign_up():
-        FirstUser.Username = name_var.get()
-        FirstUser.Password = passw_var.get()
-
-        json_credentials = {"user": FirstUser.Username, "password": FirstUser.Password}
-        with open("store.json", "w") as outfile:
-            json.dump(json_credentials, outfile, indent=2)
-
-    # creating a label for
-    # name using widget Label
-    name_label = tk.Label(root, text="Username", font=("calibre", 10, "bold"))
-    # creating  a popup warning
-    # label
-    pop_up = tk.Label(
-        root,
-        text="""Please Enter Valid Credentials
-         \n if you like to sign up please put in credentials
-         \n 1. type your user and password you want
-         \n 2. click sign up 
-        \n 3. you then can now input your user and password you have just created""",
-        font=("calibre", 10, "bold"),
+    # UI Components
+    title_label = tk.Label(
+        root, text="Login System", font=("Helvetica", 20, "bold"), bg="#EFEFEF"
     )
-
-    # creating a entry for input name
-    name_entry = tk.Entry(root, textvariable=name_var, font=("calibre", 10, "normal"))
-
-    # creating a label for password
-    passw_label = tk.Label(root, text="Password", font=("calibre", 10, "bold"))
-
-    # creating a entry for password
+    name_label = tk.Label(root, text="Username", font=("Helvetica", 12), bg="#EFEFEF")
+    name_entry = tk.Entry(root, textvariable=user_var, font=("Helvetica", 12))
+    passw_label = tk.Label(root, text="Password", font=("Helvetica", 12), bg="#EFEFEF")
     passw_entry = tk.Entry(
-        root, textvariable=passw_var, font=("calibre", 10, "normal"), show="*"
+        root, textvariable=passw_var, font=("Helvetica", 12), show="*"
     )
+    sub_btn = tk.Button(
+        root,
+        text="Submit",
+        command=submit,
+        font=("Helvetica", 12),
+        bg="#4CAF50",
+        fg="white",
+    )
+    
 
-    # creating a button using the widget -> submit()
-    sub_btn = tk.Button(root, text="Submit", command=submit)
+    # Layout
+    title_label.grid(row=0, column=0, columnspan=2, pady=(20, 10))
+    name_label.grid(row=1, column=0, pady=(10, 5))
+    name_entry.grid(row=1, column=1, pady=(10, 5))
+    passw_label.grid(row=2, column=0, pady=5)
+    passw_entry.grid(row=2, column=1, pady=5)
+    sub_btn.grid(row=3, column=1, pady=20)
+    
 
-    # sign up button
-
-    sign_up = tk.Button(root, text="Sign Up", command=sign_up)
-
-    # placing the label and entry in
-    # the required position using grid
-    # method
-    name_label.grid(row=0, column=0)
-    name_entry.grid(row=0, column=1)
-    passw_label.grid(row=1, column=0)
-    passw_entry.grid(row=1, column=1)
-    sub_btn.grid(row=2, column=1)
-    sign_up.grid(row=2, column=0)
-    pop_up.grid(row=0, column=8)
-    # performing an infinite loop
-    # for the window to display
     root.mainloop()
 
 

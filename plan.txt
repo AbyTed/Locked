@@ -1,9 +1,0 @@
--add account creation
-
--add encryption
-
--database (simple)
-
--fix GUI
-
--optimize code for speed
