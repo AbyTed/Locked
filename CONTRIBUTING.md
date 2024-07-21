@@ -55,11 +55,11 @@ Thank you for considering contributing to Locked! Contributions are welcome from
 
 ## License
 
-By contributing to Locked, you agree that your contributions will be licensed under the MIT License. See [LICENSE](../LICENSE) for details.
+By contributing to Locked, you agree that your contributions will be licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
 ## Contact
 
-If you have any questions or need further assistance, please contact us at locked.support@example.com.
+If you have any questions or need further assistance, please contact us at mylignets@gmail.com.
 
 ---
 
