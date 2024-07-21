@@ -1,5 +1,3 @@
-Certainly! A `CONTRIBUTING.md` file outlines guidelines and instructions for contributors who wish to contribute to your project. Here's a template you can use for your Python-based password manager app "Locked":
-
 ---
 
 # Contributing to Locked - Offline Password Manager
