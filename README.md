@@ -64,7 +64,7 @@ Please follow our [Contribution Guidelines](CONTRIBUTING.md) for more details.
 Locked is licensed under the MIT License. See [LICENSE](LICENSE) for details.
 
 ## Contact
-For support or inquiries about Locked, please contact us at locked.support@example.com.
+For support or inquiries about Locked, please contact us at mylignets@gmail.com.
 
 ---
 
